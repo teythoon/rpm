@@ -99,7 +99,7 @@ pkginclude_HEADERS += build/rpmfc.h
 pkginclude_HEADERS += build/rpmspec.h
 
 
-bin_PROGRAMS =		rpm rpm2cpio rpmbuild rpmdb rpmkeys rpmsign rpmspec
+bin_PROGRAMS =		rpm rpm2cpio rpmbuild rpmdb rpmkeys rpmsign rpmspec rpmsop
 if WITH_ARCHIVE
 bin_PROGRAMS += 	rpm2archive 
 endif
@@ -136,6 +136,12 @@ rpmsign_CPPFLAGS =	$(AM_CPPFLAGS)
 rpmsign_LDADD =		libcliutils.la
 rpmsign_LDADD +=	sign/librpmsign.la lib/librpm.la rpmio/librpmio.la
 rpmsign_LDADD +=	@WITH_POPT_LIB@
+
+rpmsop_SOURCES =	rpmsop.c debug.h system.h
+rpmsop_CPPFLAGS =	$(AM_CPPFLAGS)
+rpmsop_LDADD =		libcliutils.la
+rpmsop_LDADD +=		sign/librpmsign.la lib/librpm.la rpmio/librpmio.la
+rpmsop_LDADD +=		@WITH_POPT_LIB@
 
 rpmbuild_SOURCES =	rpmbuild.c debug.h system.h
 rpmbuild_CPPFLAGS =	$(AM_CPPFLAGS)
