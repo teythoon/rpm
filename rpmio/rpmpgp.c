@@ -1417,8 +1417,7 @@ static pgpArmor decodePkts(uint8_t *b, uint8_t **pkt, size_t *pktlen)
 		ec = PGPARMOR_ERR_UNKNOWN_ARMOR_TYPE;
 		goto exit;
 	    }
-	    if (rc != PGPARMOR_PUBKEY)	/* XXX ASCII Pubkeys only, please. */
-		continue;
+	    ec = rc;		/* Remember type */
 
 	    armortype = pgpValStr(pgpArmorTbl, rc);
 	    t += strlen(armortype);
@@ -1503,7 +1502,6 @@ static pgpArmor decodePkts(uint8_t *b, uint8_t **pkt, size_t *pktlen)
 	    else
 		_free(dec);
 	    if (pktlen) *pktlen = declen;
-	    ec = PGPARMOR_PUBKEY;	/* XXX ASCII Pubkeys only, please. */
 	    goto exit;
 	    break;
 	}
