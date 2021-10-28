@@ -284,6 +284,36 @@ int pgpValTok(pgpValTbl vs, const char * s, const char * se)
 }
 
 /** \ingroup rpmpgp
+ * OpenPGP hash algorithm policy.
+ * @param algo		a hash algorithm
+ * @return		1 if the algorithm is acceptable, 0 otherwise
+ */
+static int pgpHashAlgorithmPolicy(uint8_t algo)
+{
+    int acceptable = 0;
+    switch (algo) {
+    case PGPHASHALGO_MD5:		acceptable = 0; break;
+    case PGPHASHALGO_SHA1:		acceptable = 0; break;
+    case PGPHASHALGO_RIPEMD160:		acceptable = 0; break;
+    case PGPHASHALGO_MD2:		acceptable = 0; break;
+    case PGPHASHALGO_TIGER192:		acceptable = 0; break;
+    case PGPHASHALGO_HAVAL_5_160:	acceptable = 0; break;
+    case PGPHASHALGO_SHA256:		acceptable = 1; break;
+    case PGPHASHALGO_SHA384:		acceptable = 1; break;
+    case PGPHASHALGO_SHA512:		acceptable = 1; break;
+    case PGPHASHALGO_SHA224:		acceptable = 1; break;
+    default:				acceptable = 0; break;
+    }
+
+    if (!acceptable) {
+	pgpPrtVal("Policy rejected weak hash algorithm ", pgpHashTbl, algo);
+	pgpPrtNL();
+    }
+
+    return acceptable;
+}
+
+/** \ingroup rpmpgp
  * Decode length from 1, 2, or 5 octet body length encoding, used in
  * new format packet headers and V4 signature subpackets.
  * Partial body lengths are (intentionally) not supported.
@@ -1293,6 +1323,10 @@ rpmRC pgpVerifySignature(pgpDigParams key, pgpDigParams sig, DIGEST_CTX hashctx)
     rpmRC res = RPMRC_FAIL; /* assume failure */
 
     if (sig == NULL || ctx == NULL)
+	goto exit;
+
+    /* Check whether the hash algorithm meets our policy */
+    if (!pgpHashAlgorithmPolicy(sig->hash_algo))
 	goto exit;
 
     if (sig->hash != NULL)
