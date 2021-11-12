@@ -104,16 +104,6 @@ enum rpmDigestFlags_e {
 typedef rpmFlags rpmDigestFlags;
 
 /** \ingroup rpmpgp
- * Print/parse a OpenPGP packet(s).
- * @param pkts		OpenPGP packet(s)
- * @param pktlen	OpenPGP packet(s) length (no. of bytes)
- * @param[out] dig	parsed output of signature/pubkey packet parameters
- * @param printing	should packets be printed?
- * @return		-1 on error, 0 on success
- */
-int pgpPrtPkts(const uint8_t *pkts, size_t pktlen, pgpDig dig, int printing);
-
-/** \ingroup rpmpgp
  * Parse armored OpenPGP packets from memory.
  * @param armor		armored OpenPGP packet string
  * @param[out] pkt	dearmored OpenPGP packet(s) (malloced)

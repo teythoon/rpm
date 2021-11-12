@@ -962,6 +962,16 @@ int pgpPrtParamsSubkeys(const uint8_t *pkts, size_t pktlen,
 			int *subkeysCount);
 
 /** \ingroup rpmpgp
+ * Print/parse a OpenPGP packet(s).
+ * @param pkts		OpenPGP packet(s)
+ * @param pktlen	OpenPGP packet(s) length (no. of bytes)
+ * @param[out] dig	parsed output of signature/pubkey packet parameters
+ * @param printing	should packets be printed?
+ * @return		-1 on error, 0 on success
+ */
+int pgpPrtPkts(const uint8_t *pkts, size_t pktlen, pgpDig dig, int printing);
+
+/** \ingroup rpmpgp
  * Parse armored OpenPGP packets from a file.
  * @param fn		file name
  * @param[out] pkt	dearmored OpenPGP packet(s) (malloced)
