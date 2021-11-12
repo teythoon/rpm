@@ -1,7 +1,7 @@
 #ifndef _RPMDIGEST_H
 #define _RPMDIGEST_H
 
-#include <rpm/rpmpgp.h>
+#include "rpmpgp_internal.h"
 
 typedef struct pgpDigAlg_s * pgpDigAlg;
 

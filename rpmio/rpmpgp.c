@@ -11,6 +11,7 @@
 #include <rpm/rpmlog.h>
 #include <rpm/rpmbase64.h>
 
+#include "rpmio/rpmpgp_internal.h"
 #include "rpmio/digest.h"
 #include "rpmio/rpmio_internal.h"	/* XXX rpmioSlurp */
 

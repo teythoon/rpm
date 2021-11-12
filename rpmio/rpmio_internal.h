@@ -6,7 +6,7 @@
  */
 
 #include <rpm/rpmio.h>
-#include <rpm/rpmpgp.h>
+#include "rpmpgp_internal.h"
 
 #ifdef __cplusplus
 extern "C" {
