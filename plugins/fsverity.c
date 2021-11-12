@@ -94,7 +94,7 @@ static rpmRC fsverity_fsm_file_prepare(rpmPlugin plugin, rpmfi fi,
     arg.sig_ptr = (uintptr_t)signature;
     arg.sig_size = len;
 
-    buffer = pgpHexStr(signature, arg.sig_size);
+    buffer = rpmHexStr(signature, arg.sig_size);
     rpmlog(RPMLOG_DEBUG, "applying signature: %s\n", buffer);
     free(buffer);
 

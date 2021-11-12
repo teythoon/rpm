@@ -995,7 +995,7 @@ unsigned int pgpGrab(const uint8_t *s, size_t nbytes)
  * @param plen		no. of bytes
  * @return		hex formatted string (malloc'ed)
  */
-char * pgpHexStr(const uint8_t *p, size_t plen);
+char * rpmHexStr(const uint8_t *p, size_t plen);
 
 /** \ingroup rpmpgp
  * Calculate OpenPGP public key fingerprint.
