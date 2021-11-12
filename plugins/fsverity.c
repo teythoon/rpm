@@ -18,7 +18,6 @@
 #include <rpm/rpmlog.h>
 #include <rpmio/rpmstring.h>
 #include <rpmio/rpmmacro.h>
-#include <rpmio/rpmpgp.h>
 
 #include "lib/rpmfs.h"
 #include "lib/rpmplugin.h"

@@ -9,7 +9,6 @@
 #include <rpm/rpmlib.h>		/* RPMSIGTAG & related */
 #include <rpm/rpmlog.h>		/* rpmlog */
 #include <rpm/rpmfi.h>
-#include <rpm/rpmpgp.h>		/* rpmDigestLength */
 #include "lib/header.h"		/* HEADERGET_MINMEM */
 #include "lib/header_internal.h"
 #include "lib/rpmtypes.h"	/* rpmRC */
