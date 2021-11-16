@@ -440,27 +440,6 @@ rpmts_HdrCheck(rpmtsObject * s, PyObject *obj)
     return Py_BuildValue("(iN)", rpmrc, utf8FromString(msg));
 }
 
-static PyObject *
-rpmts_PgpImportPubkey(rpmtsObject * s, PyObject * args, PyObject * kwds)
-{
-    PyObject * blob;
-    unsigned char * pkt;
-    unsigned int pktlen;
-    int rc;
-    char * kwlist[] = {"pubkey", NULL};
-
-    if (!PyArg_ParseTupleAndKeywords(args, kwds, "S:PgpImportPubkey",
-    	    kwlist, &blob))
-	return NULL;
-
-    pkt = (unsigned char *)PyBytes_AsString(blob);
-    pktlen = PyBytes_Size(blob);
-
-    rc = rpmtsImportPubkey(s->ts, pkt, pktlen);
-
-    return Py_BuildValue("i", rc);
-}
-
 static PyObject *rpmts_setKeyring(rpmtsObject *s, PyObject *arg)
 {
     rpmKeyring keyring = NULL;
@@ -801,8 +780,6 @@ Remove all elements from the transaction set\n" },
   "the digest or signature is verified.\n\n"
   "\thdrblob : unloaded header blob\n"
   "Return tuple (int status, message string)"},
- {"pgpImportPubkey",	(PyCFunction) rpmts_PgpImportPubkey,	METH_VARARGS|METH_KEYWORDS,
-  "pgpImportPubkey(pubkey) -- Import public key packet." },
  {"getKeyring",	(PyCFunction) rpmts_getKeyring,	METH_VARARGS|METH_KEYWORDS, 
   "ts.getKeyring(autoload=False) -- Return key ring object." },
  {"setKeyring",	(PyCFunction) rpmts_setKeyring,	METH_O, 
