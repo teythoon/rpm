@@ -20,24 +20,17 @@ static PyObject *rpmPubkey_new(PyTypeObject *subtype,
     PyObject *key, *ret;
     char *kwlist[] = { "key", NULL };
     rpmPubkey pubkey = NULL;
-    uint8_t *pkt;
-    size_t pktlen;
 
     if (!PyArg_ParseTupleAndKeywords(args, kwds, "S", kwlist, &key))
 	return NULL;
 
-    if (pgpParsePkts(PyBytes_AsString(key), &pkt, &pktlen) <= 0) {
-	PyErr_SetString(PyExc_ValueError, "invalid PGP armor");
-	return NULL;
-    }
-    pubkey = rpmPubkeyNew(pkt, pktlen);
+    pubkey = rpmPubkeyParse(PyBytes_AsString(key));
     if (pubkey == NULL) {
-	PyErr_SetString(PyExc_ValueError, "invalid pubkey");
+	PyErr_SetString(PyExc_ValueError, "invalid armored pubkey");
 	ret = NULL;
     } else
 	ret = rpmPubkey_Wrap(subtype, pubkey);
 
-    free(pkt);
     return ret;
 }
 
