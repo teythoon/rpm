@@ -129,6 +129,22 @@ exit:
     return key;
 }
 
+rpmPubkey rpmPubkeyParse(const char *armor)
+{
+    uint8_t *pkt = NULL;
+    size_t pktlen;
+    rpmPubkey key = NULL;
+
+    if (pgpParsePkts(armor, &pkt, &pktlen) <= 0) {
+	goto exit;
+    }
+    key = rpmPubkeyNew(pkt, pktlen);
+    free(pkt);
+
+exit:
+    return key;
+}
+
 rpmPubkey rpmPubkeyNew(const uint8_t *pkt, size_t pktlen)
 {
     rpmPubkey key = NULL;

@@ -82,6 +82,13 @@ rpmPubkey *rpmGetSubkeys(rpmPubkey mainkey, int *count);
 rpmPubkey rpmPubkeyRead(const char *filename);
 
 /** \ingroup rpmkeyring
+ * Parse armored OpenPGP pubkey from memory.
+ * @param armor		armored OpenPGP pubkey string
+ * @return		new pubkey handle
+ */
+rpmPubkey rpmPubkeyParse(const char *armor);
+
+/** \ingroup rpmkeyring
  * Free a pubkey.
  * @param key		Pubkey to free
  * @return		NULL always
