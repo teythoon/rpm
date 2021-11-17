@@ -328,6 +328,15 @@ rpmdbMatchIterator rpmtsInitIterator(const rpmts ts, rpmDbiTagVal rpmtag,
 rpmRC rpmtsImportHeader(rpmtxn txn, Header h, rpmFlags flags);
 
 /** \ingroup rpmts
+ * Import public keys from the given armored keyring.
+ * @todo Implicit --update policy for gpg-pubkey headers.
+ * @param ts            transaction set
+ * @param armor         armored OpenPGP keyring
+ * @return              RPMRC_OK/RPMRC_FAIL
+ */
+rpmRC rpmtsImportPubkeys(rpmts ts, const char *armor);
+
+/** \ingroup rpmts
  * Import public key packet(s).
  * @todo Implicit --update policy for gpg-pubkey headers.
  * @param ts            transaction set

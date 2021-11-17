@@ -123,6 +123,14 @@ char * rpmPubkeyBase64(rpmPubkey key);
  */
 pgpDigParams rpmPubkeyPgpDigParams(rpmPubkey key);
 
+/** \ingroup rpmkeyring
+ * Parse armored OpenPGP keyring from memory.
+ * @param armor		armored OpenPGP keyring string
+ * @param[out] len	number of pubkeys read
+ * @return		malloced array of pubkey handle
+ */
+rpmPubkey *rpmPubkeysParse(const char *armor, size_t *len);
+
 #ifdef __cplusplus
 }
 #endif

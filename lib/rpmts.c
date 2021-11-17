@@ -552,6 +552,11 @@ rpmRC rpmtsImportHeader(rpmtxn txn, Header h, rpmFlags flags)
     return rc;
 }
 
+rpmRC rpmtsImportPubkeys(rpmts ts, const char *armor)
+{
+    assert(!"implemented");
+}
+
 rpmRC rpmtsImportPubkey(const rpmts ts, const unsigned char * pkt, size_t pktlen)
 {
     Header h = NULL;
